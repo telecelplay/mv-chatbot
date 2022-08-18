@@ -1,0 +1,25 @@
+{
+  "code" : "org.meveo.odoo.CreateMessage",
+  "description" : "create a message",
+  "inputs" : [ {
+    "name" : "body",
+    "type" : "String"
+  }, {
+    "name" : "partnerId",
+    "type" : "Integer"
+  }, {
+    "name" : "image",
+    "type" : "String"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "Map<String,Object>"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}
