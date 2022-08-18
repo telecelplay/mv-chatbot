@@ -2,7 +2,7 @@
   "code" : "odooMessage",
   "description" : "send odoo message",
   "secured" : true,
-  "checkPathParams" : false,
+  "checkPathParams" : true,
   "serviceCode" : "org.meveo.odoo.CreateMessage",
   "synchronous" : true,
   "method" : "POST",
