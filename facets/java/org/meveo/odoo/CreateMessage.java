@@ -59,7 +59,6 @@ public class CreateMessage extends Script {
         OdooXmlRpc odooService = new OdooXmlRpc(paramBeanFactory);
         List<Object> filterList = new ArrayList<>();
         filterList.add(asList("subject", "=", body));
-        filterList.add(asList("type", "=", "comment"));
 
         Map<String, Object> params = new HashMap<>();
         params.put("body", body);
