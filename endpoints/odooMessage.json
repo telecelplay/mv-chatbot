@@ -1,0 +1,32 @@
+{
+  "code" : "odooMessage",
+  "description" : "send odoo message",
+  "secured" : true,
+  "checkPathParams" : false,
+  "serviceCode" : "org.meveo.odoo.CreateMessage",
+  "synchronous" : true,
+  "method" : "POST",
+  "parameterMappings" : [ {
+    "serviceParameter" : "body",
+    "multivalued" : false,
+    "parameterName" : "body",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "partnerId",
+    "multivalued" : false,
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "image",
+    "multivalued" : false,
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "odooMessage",
+  "path" : "/",
+  "pool" : {
+    "usePool" : false
+  }
+}
