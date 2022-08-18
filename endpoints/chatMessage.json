@@ -1,0 +1,19 @@
+{
+  "code" : "chatMessage",
+  "description" : "post message",
+  "secured" : false,
+  "checkPathParams" : false,
+  "serviceCode" : "org.meveo.script.ChatBotScript",
+  "synchronous" : true,
+  "method" : "POST",
+  "parameterMappings" : [ ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "chatMessage",
+  "path" : "/",
+  "pool" : {
+    "usePool" : false
+  }
+}
