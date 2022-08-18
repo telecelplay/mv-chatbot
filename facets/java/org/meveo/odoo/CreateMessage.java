@@ -74,6 +74,7 @@ public class CreateMessage extends Script {
         try {
             id = odooService.executeQuery("mail.message", "create", List.of(params), null);
         } catch (Exception e) {
+          LOG.error("Error creating odoo message: {}",e);
             result.put("status", "failed");
             result.put("result", "Failed to create new mail message in Odoo.");
             return;
