@@ -1,0 +1,10 @@
+{
+  "code" : "mv-microsoft-bot",
+  "description" : "microsoft chat bot",
+  "license" : "GPL",
+  "currentVersion" : "0.1",
+  "isInDraft" : true,
+  "autoCommit" : true,
+  "moduleDependencies" : [ ],
+  "moduleFiles" : [ ]
+}
