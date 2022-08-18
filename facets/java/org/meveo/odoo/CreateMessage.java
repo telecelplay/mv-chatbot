@@ -62,7 +62,6 @@ public class CreateMessage extends Script {
 
         Map<String, Object> params = new HashMap<>();
         params.put("body", body);
-        params.put("type",  "comment");
         if (partnerId != null) {
             params.put("author_id", partnerId);
         }
