@@ -83,7 +83,7 @@ public class CreateMessage extends Script {
         //params.put("subject", subject);
         
 	    //channel
-        params.put("model", "mail.chanel");
+        params.put("model", "mail.channel");
         params.put("res_id",1);
         params.put("record_name","general");
         
