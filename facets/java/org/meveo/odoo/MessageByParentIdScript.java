@@ -1,5 +1,7 @@
 package org.meveo.odoo;
 
+import static org.meveo.odoo.ProductDetailService.*;
+
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -34,7 +36,7 @@ public class MessageByParentIdScript extends Script {
         try {
             message = (Map<String, Object>) retrieveAnswer();
             if (message != null) {
-                result = "{\"status\": \"success\", \"result\": " + message + "}";
+                result = "{\"status\": \"success\", \"result\": " + toJson(message) + "}";
             } else {
                 result = "{\"status\": \"success\", \"result\": {}";
             }
