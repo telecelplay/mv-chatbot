@@ -1,37 +1,61 @@
-const odooMessageAnswer = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/odooMessageAnswer/`, baseUrl);
-	if (parameters.messageId !== undefined) {
-		url.searchParams.append('messageId', parameters.messageId);
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "odooMessageAnswerRequest",
+  "id" : "odooMessageAnswerRequest",
+  "default" : "Schema definition for odooMessageAnswer",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "parentId" : {
+      "title" : "parentId",
+      "id" : "odooMessageAnswer_parentId",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
+}
+
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "odooMessageAnswerResponse",
+  "id" : "odooMessageAnswerResponse",
+  "default" : "Schema definition for odooMessageAnswer",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
+}
+
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class odooMessageAnswer extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("odooMessageAnswer", "GET");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
 	}
 
-	return fetch(url.toString(), {
-		method: 'GET'
-	});
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
 }
 
-const odooMessageAnswerForm = (container) => {
-	const html = `<form id='odooMessageAnswer-form'>
-		<div id='odooMessageAnswer-parentId-form-field'>
-			<label for='parentId'>parentId</label>
-			<input type='text' id='odooMessageAnswer-parentId-param' name='parentId'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const parentId = container.querySelector('#odooMessageAnswer-parentId-param');
-
-	container.querySelector('#odooMessageAnswer-form button').onclick = () => {
-		const params = {
-			parentId : parentId.value !== "" ? parentId.value : undefined
-		};
-
-		odooMessageAnswer(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
-}
-
-export { odooMessageAnswer, odooMessageAnswerForm };
+export default new odooMessageAnswer();
