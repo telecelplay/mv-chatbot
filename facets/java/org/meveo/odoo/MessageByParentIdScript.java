@@ -45,13 +45,13 @@ public class MessageByParentIdScript extends Script {
     }
 
     public Object retrieveAnswer() {
-        List<Integer> ids = List.of(messageId);
         Map<String, Object> fields = new HashMap<>();
         String[] fieldNames = {"body"};
         fields.put("fields", fieldNames);
+        List filters = List.of(List.of(List.of("parent_id", "=",messageId )));
         Object[] messages;
         try {
-            messages = odooService.executeQuery("mail.message", "read", ids, fields);
+            messages = odooService.executeQuery("mail.message", "search_read", filters, fields);
         } catch (Exception e) {
             throw new RuntimeException("Failed to retrieve message. (id: " + messageId + ")", e);
         }
