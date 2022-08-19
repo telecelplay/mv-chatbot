@@ -25,8 +25,11 @@ public class CreateMessage extends Script {
     private final ParamBeanFactory paramBeanFactory = getCDIBean(ParamBeanFactory.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
+    private String subject;
     private String body;
+    private String channel;
     private Integer partnerId;
+    private Integer parentId;
     private String image;
     private final Map<String, Object> result = new HashMap<>();
 
@@ -34,12 +37,20 @@ public class CreateMessage extends Script {
         return this.result;
     }
 
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+  
     public void setBody(String body) {
         this.body = body;
     }
 
     public void setPartnerId(Integer partnerId) {
         this.partnerId = partnerId;
+    }
+  
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public void setImage(String image) {
@@ -61,7 +72,24 @@ public class CreateMessage extends Script {
         filterList.add(asList("subject", "=", body));
 
         Map<String, Object> params = new HashMap<>();
+        
+        //message type
+        params.put("message_type","comment");
+        params.put("is_internal",Boolean.TRUE);
+        params.put("subtype_id",1);
+        
+        //message content
         params.put("body", body);
+        //params.put("subject", subject);
+        
+	    //channel
+        params.put("model", "mail.chanel");
+        params.put("res_id",1);
+        params.put("record_name","general");
+        
+         if (parentId != null) {
+        	params.put("parent_id",parentId);
+        }
         if (partnerId != null) {
             params.put("author_id", partnerId);
         }
@@ -77,7 +105,7 @@ public class CreateMessage extends Script {
             result.put("result", "Failed to create new mail message in Odoo.");
             return;
         }
-
         result.put("status", "success");
+        result.put("message_id", id);
     }
 }
