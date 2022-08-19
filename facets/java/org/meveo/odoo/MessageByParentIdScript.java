@@ -32,11 +32,11 @@ public class MessageByParentIdScript extends Script {
 	    @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
-        Object message;
+        Object[] messages;
         try {
-            message = (Map<String, Object>) retrieveAnswer();
-            if (message != null) {
-                result = "{\"status\": \"success\", \"result\": " + toJson(message) + "}";
+            messages = retrieveAnswers();
+            if (messages != null) {
+                result = "{\"status\": \"success\", \"result\": " + toJson(messages) + "}";
             } else {
                 result = "{\"status\": \"success\", \"result\": {}";
             }
@@ -46,7 +46,7 @@ public class MessageByParentIdScript extends Script {
         }
     }
 
-    public Object retrieveAnswer() {
+    public Object[] retrieveAnswers() {
         Map<String, Object> fields = new HashMap<>();
         String[] fieldNames = {"body"};
         fields.put("fields", fieldNames);
@@ -58,16 +58,7 @@ public class MessageByParentIdScript extends Script {
             throw new RuntimeException("Failed to retrieve message. (id: " + messageId + ")", e);
         }
 
-        boolean hasMessage = messages != null && messages.length > 0 && messages[0] != null;
-        Object message = null;
-        if (hasMessage) {
-            try {
-                message = messages[0];
-            } catch (Exception e) {
-                throw new RuntimeException("Failed to retrieve message. (id: " + messageId + ")", e);
-            }
-        }
-        return message;
+        return messages;
     }
 
 }
