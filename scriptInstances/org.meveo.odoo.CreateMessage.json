@@ -2,10 +2,16 @@
   "code" : "org.meveo.odoo.CreateMessage",
   "description" : "create a message",
   "inputs" : [ {
+    "name" : "subject",
+    "type" : "String"
+  }, {
     "name" : "body",
     "type" : "String"
   }, {
     "name" : "partnerId",
+    "type" : "Integer"
+  }, {
+    "name" : "parentId",
     "type" : "Integer"
   }, {
     "name" : "image",
