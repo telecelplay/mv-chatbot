@@ -2,7 +2,7 @@
   "code" : "odooMessage",
   "description" : "send odoo message",
   "secured" : true,
-  "checkPathParams" : true,
+  "checkPathParams" : false,
   "serviceCode" : "org.meveo.odoo.CreateMessage",
   "synchronous" : true,
   "method" : "POST",
@@ -18,6 +18,15 @@
   }, {
     "serviceParameter" : "image",
     "multivalued" : false,
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "subject",
+    "multivalued" : false,
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "parentId",
+    "multivalued" : false,
+    "parameterName" : "parentId",
     "valueRequired" : false
   } ],
   "pathParameters" : [ ],
