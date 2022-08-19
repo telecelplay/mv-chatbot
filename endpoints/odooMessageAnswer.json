@@ -2,7 +2,7 @@
   "code" : "odooMessageAnswer",
   "secured" : true,
   "checkPathParams" : true,
-  "serviceCode" : "org.meveo.script.MessageByParentIdScript",
+  "serviceCode" : "org.meveo.odoo.MessageByParentIdScript",
   "synchronous" : true,
   "method" : "GET",
   "parameterMappings" : [ ],
