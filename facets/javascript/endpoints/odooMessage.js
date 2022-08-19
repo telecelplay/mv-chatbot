@@ -1,67 +1,65 @@
-const odooMessage = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/odooMessage/`, baseUrl);
-	return fetch(url.toString(), {
-		method: 'POST', 
-		headers : new Headers({
- 			'Content-Type': 'application/json'
-		}),
-		body: JSON.stringify({
-			body : parameters.body,
-			null : parameters.null,
-			null : parameters.null,
-			null : parameters.null,
-			parentId : parameters.parentId
-		})
-	});
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "odooMessageRequest",
+  "id" : "odooMessageRequest",
+  "default" : "Schema definition for odooMessage",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "body" : {
+      "title" : "body",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "parentId" : {
+      "title" : "parentId",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-const odooMessageForm = (container) => {
-	const html = `<form id='odooMessage-form'>
-		<div id='odooMessage-body-form-field'>
-			<label for='body'>body</label>
-			<input type='text' id='odooMessage-body-param' name='body'/>
-		</div>
-		<div id='odooMessage-null-form-field'>
-			<label for='null'>null</label>
-			<input type='text' id='odooMessage-null-param' name='null'/>
-		</div>
-		<div id='odooMessage-null-form-field'>
-			<label for='null'>null</label>
-			<input type='text' id='odooMessage-null-param' name='null'/>
-		</div>
-		<div id='odooMessage-null-form-field'>
-			<label for='null'>null</label>
-			<input type='text' id='odooMessage-null-param' name='null'/>
-		</div>
-		<div id='odooMessage-parentId-form-field'>
-			<label for='parentId'>parentId</label>
-			<input type='text' id='odooMessage-parentId-param' name='parentId'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const body = container.querySelector('#odooMessage-body-param');
-	const null = container.querySelector('#odooMessage-null-param');
-	const null = container.querySelector('#odooMessage-null-param');
-	const null = container.querySelector('#odooMessage-null-param');
-	const parentId = container.querySelector('#odooMessage-parentId-param');
-
-	container.querySelector('#odooMessage-form button').onclick = () => {
-		const params = {
-			body : body.value !== "" ? body.value : undefined,
-			null : null.value !== "" ? null.value : undefined,
-			null : null.value !== "" ? null.value : undefined,
-			null : null.value !== "" ? null.value : undefined,
-			parentId : parentId.value !== "" ? parentId.value : undefined
-		};
-
-		odooMessage(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "odooMessageResponse",
+  "id" : "odooMessageResponse",
+  "default" : "Schema definition for odooMessage",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-export { odooMessage, odooMessageForm };
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class odooMessage extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("odooMessage", "POST");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
+	}
+
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
+}
+
+export default new odooMessage();
