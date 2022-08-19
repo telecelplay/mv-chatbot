@@ -78,6 +78,10 @@ public class CreateMessage extends Script {
         params.put("is_internal",Boolean.TRUE);
         params.put("subtype_id",1);
         
+        //from
+        params.put("email_from","\"OdooBot\" <odoobot@example.com>");
+        params.put("author_id",2);
+      
         //message content
         params.put("body", body);
         //params.put("subject", subject);
