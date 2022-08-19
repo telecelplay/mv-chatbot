@@ -1,0 +1,24 @@
+{
+  "code" : "odooMessageAnswer",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "org.meveo.script.MessageByParentIdScript",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ {
+    "serviceParameter" : "messageId",
+    "multivalued" : false,
+    "parameterName" : "parentId",
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "odooMessageAnswer",
+  "path" : "/",
+  "pool" : {
+    "usePool" : false
+  }
+}
