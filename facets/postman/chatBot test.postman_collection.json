@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "0e496279-0fc7-4992-b31a-ed9b43b68ea6",
+		"name": "chatBot test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6530690"
+	},
+	"item": [
+		{
+			"name": "Login and init var Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.environment.get(\"variable_key\");",
+							"var json = pm.response.json();",
+							"var token = json[\"access_token\"];",
+							"var refreshToken = json[\"refresh_token\"]",
+							"pm.environment.set(\"access_token\", token);",
+							"pm.environment.set(\"refresh_token\", refreshToken);",
+							"",
+							"",
+							"//pm.environment.set(\"user1_wallet\", \"d42B59ab3704e65842F1b39A3D18CEe704687a2c\");",
+							"//pm.environment.set(\"user2_wallet\", \"deE0d5bE78E1Db0B36d3C1F908f4165537217333\");",
+							"//pm.environment.set(\"user3_wallet\", \"1C8eC2082bF8F75d2226a2E086de3D6D7B99fDC4\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "meveo-web",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{keycloakUsername}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{keycloakPassword}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "afe07e5a-68cb-4fb0-8b75-5b6053b07dc3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{protocol}}://{{keycloak.hostname}}:{{keycloak.port}}/auth/realms/{{webContext}}/protocol/openid-connect/token",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{keycloak.hostname}}"
+					],
+					"port": "{{keycloak.port}}",
+					"path": [
+						"auth",
+						"realms",
+						"{{webContext}}",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				},
+				"description": "Request Keycloak and get auth token"
+			},
+			"response": []
+		},
+		{
+			"name": "create message",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"body\":\"test from postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/odooMessage",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{webContext}}",
+						"rest",
+						"odooMessage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list answer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}//xmlrpc/2/",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"",
+						"xmlrpc",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
